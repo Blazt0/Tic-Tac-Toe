@@ -1,30 +1,38 @@
 import React, { useState } from "react";
 import "./innerBoxes.css";
 
-const Mark = () => {
-
-  const [box, setX] = useState();
-
+const Mark = (props) => {
+  const [box, setMark] = useState("");
   const makeX = () => {
     if (box === "X") {
       console.log("ERROR");
     } else if (box === "O") {
       console.log("ERROR");
-    } else {
-      setX("X");
-      console.log("CLICKEDX");
+    } else if (box === "") {
+      setMark("X");
+      props.counter();
+      console.log(props.turn);
     }
-  }
-  
-  const clickHandler = () => {
-      let i = 0
-      const counter = () => {
-        i = i + 1
-        console.log(i)
-      }
-      makeX()
-      counter()
+  };
 
+  const makeO = () => {
+    if (box === "O") {
+      console.log("Error");
+    } else if (box === "X") {
+      console.log("Error");
+    } else if (box === "") {
+      setMark("O");
+      props.counter();
+      console.log(props.turn);
+    }
+  };
+
+  const clickHandler = () => {
+    if (props.turn % 2 === 0) {
+      makeX();
+    } else {
+      makeO();
+    }
   };
 
   return (
