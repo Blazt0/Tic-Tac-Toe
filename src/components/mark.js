@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./innerBoxes.css";
 
 const Mark = (props) => {
+  let currentMark = ""
   const [box, setMark] = useState("");
   const makeX = () => {
     if (box === "X") {
@@ -10,7 +11,7 @@ const Mark = (props) => {
       console.log("ERROR");
     } else if (box === "") {
       setMark("X");
-      props.counter();
+      props.counter("X");
       console.log(props.turn);
     }
   };
@@ -22,18 +23,23 @@ const Mark = (props) => {
       console.log("Error");
     } else if (box === "") {
       setMark("O");
-      props.counter();
+      props.counter("O");
       console.log(props.turn);
     }
   };
 
-  const clickHandler = () => {
+
+  const clickHandler = () => { 
+
     if (props.turn % 2 === 0) {
       makeX();
+      props.idHandler(props.id)
     } else {
       makeO();
+      props.idHandler(props.id)
     }
   };
+
 
   return (
     <button onClick={clickHandler} className="square">
